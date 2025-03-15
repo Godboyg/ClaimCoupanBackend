@@ -5,17 +5,13 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const app = express();
 const PORT = 5000;
+require("dotenv").config();
 
-// Middleware
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
-// Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/coupons", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(()=>{
+mongoose.connect(process.env.DB_URL).then(()=>{
     console.log("db connected");
 });
 
